@@ -26,3 +26,80 @@
    - The function checks if the balance of the `_address` is sufficient to burn the requested `_amount` and then decreases the `totalSupply` and the `_address` balance by `_amount`.
 
 8. *Function Modifiers:* The absence of function modifiers in this contract means that the functions are accessible by anyone and do not have any access restrictions.
+
+#Code
+//SPDX-License-Identifier: MIT
+pragma solidity 0.8.18;
+
+
+contract Abhinav {
+
+    // public variables here
+    string public tokenName = "Abhinav";
+    string public tokenSymbol = "UID";
+    uint public totalSupply = 0;
+
+    // mapping variable here
+    mapping(address => uint) public balances;
+
+    // mint function
+    function mintTokens(address _address, uint _amount) public {
+        totalSupply += _amount;
+        balances[_address] += _amount;
+    }
+
+    // burn function
+    function burnTokens(address _address, uint _amount) public {
+        require(balances[_address] >= _amount, "Cannot burn more than balance tokens");
+        totalSupply -= _amount;
+        balances[_address] -= _amount;
+    }
+}
+
+#Execution
+
+1. **Contract Deployment:**
+   - The contract is deployed to the Ethereum blockchain by a user through a transaction.
+   - The contract's code is stored on the blockchain, and a contract address is generated.
+
+2. **Initialization:**
+   - The contract's `tokenName`, `tokenSymbol`, and `totalSupply` are initialized.
+   - The `balances` mapping is created to store token balances for different addresses.
+
+3. **Mint Function Execution (`mintTokens`):
+   - A user calls the `mintTokens` function, providing the `_address` and `_amount` as arguments.
+   - The function executes the following steps:
+     - It increments the `totalSupply` by `_amount`, effectively increasing the total token supply.
+     - It adds `_amount` tokens to the `_address`'s balance in the `balances` mapping.
+
+4. **Burn Function Execution (`burnTokens`):
+   - A user calls the `burnTokens` function, providing the `_address` and `_amount` as arguments.
+   - The function executes the following steps:
+     - It checks whether the `_address` has a balance greater than or equal to `_amount`.
+     - If the balance is sufficient, it deducts `_amount` tokens from the `_address`'s balance in the `balances` mapping.
+     - It decreases the `totalSupply` by `_amount`, effectively reducing the total token supply.
+
+5. **Transaction Verification:**
+   - The Ethereum network verifies the transaction's validity.
+   - The network checks for sufficient gas, sender's authorization, and adherence to contract logic.
+
+6. **State Update:**
+   - If the transaction is valid, the contract's state is updated:
+     - Changes to `totalSupply` and `balances` are reflected based on the executed minting or burning actions.
+   - If the transaction fails, the state remains unchanged.
+
+7. **Gas Consumption:**
+   - Gas is consumed for every operation in the contract, including reading and writing data, executing functions, and more.
+   - Users pay gas fees to miners to cover the computational resources used by their transactions.
+
+8. **Public Variable Access:**
+   - The contract's `tokenName`, `tokenSymbol`, `totalSupply`, and other public variables can be accessed by anyone without executing a transaction.
+
+9. **View and Pure Functions:**
+   - If the contract contained functions marked as `view` or `pure`, these functions could be called without requiring a transaction. They only retrieve data and do not modify the state.
+
+10. **Smart Contract Interaction:**
+    - Other contracts or external applications can interact with this contract by calling its functions and reading its public variables.
+  
+11. **Event Logging (Not Present in the Provided Code):**
+    - Typically, Solidity contracts emit events to log important state changes or interactions. Events are used to provide a way for external applications to listen and react to changes on the blockchain.
