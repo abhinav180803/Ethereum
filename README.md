@@ -27,7 +27,7 @@
 
 8. *Function Modifiers:* The absence of function modifiers in this contract means that the functions are accessible by anyone and do not have any access restrictions.
 
-#Code
+# Code
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.18;
 
@@ -56,7 +56,7 @@ contract Abhinav {
     }
 }
 
-#Execution
+# Execution
 
 1. **Contract Deployment:**
    - The contract is deployed to the Ethereum blockchain by a user through a transaction.
